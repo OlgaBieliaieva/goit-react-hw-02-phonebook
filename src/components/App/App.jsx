@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import shortid from 'shortid';
 import SectionTitle from '../SectionTitle/SectionTitle';
 import ContactForm from '../ContactForm/ContactForm';
-// import Filter from './Filter/Filter';
+import Filter from '../Filter/Filter';
 import ContactList from '../ContactList/ContactList';
 import contacts from '../../contacts.json';
 import css from './App.module.css';
@@ -10,7 +10,7 @@ import css from './App.module.css';
 class App extends Component {
   state = {
     contacts: contacts,
-    name: '',
+    filter: '',
   };
 
   addContact = ({ name, number }) => {
@@ -24,6 +24,11 @@ class App extends Component {
     }));
   };
 
+  handleFilterChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
   render() {
     return (
       <main className={css.appContainer}>
@@ -31,8 +36,11 @@ class App extends Component {
         <ContactForm addContact={this.addContact} />
 
         <SectionTitle text="Contacts" />
-        {/* <Filter /> */}
-        <ContactList contacts={this.state.contacts} />
+        <Filter
+          data={this.state}
+          filterChangeHandler={this.handleFilterChange}
+        />
+        <ContactList contacts={this.state.contacts} query={this.state.filter} />
       </main>
     );
   }

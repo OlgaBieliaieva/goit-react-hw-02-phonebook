@@ -14,13 +14,17 @@ class ContactList extends Component {
   render() {
     return (
       <ul className={css.contactList}>
-        {this.props.contacts.map(({ id, name, number }) => {
-          return (
-            <li className={css.contactItem} key={id}>
-              {name}: {number}
-            </li>
-          );
-        })}
+        {this.props.contacts
+          .filter(contact =>
+            contact.name.toLowerCase().includes(this.props.query.toLowerCase())
+          )
+          .map(({ id, name, number }) => {
+            return (
+              <li className={css.contactItem} key={id}>
+                {name}: {number}
+              </li>
+            );
+          })}
       </ul>
     );
   }
