@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import css from './ContactList.module.css';
 
 class ContactList extends Component {
-  //   static propTypes = {
-  //     options: PropTypes.shape({
-  //       good: PropTypes.number.isRequired,
-  //       neutral: PropTypes.number.isRequired,
-  //       bad: PropTypes.number.isRequired,
-  //     }),
-  //   };
+  static propTypes = {
+    contacts: PropTypes.array.isRequired,
+    query: PropTypes.string.isRequired,
+    onDeleteContact: PropTypes.func.isRequired,
+  };
 
   render() {
     return (
@@ -22,6 +20,14 @@ class ContactList extends Component {
             return (
               <li className={css.contactItem} key={id}>
                 {name}: {number}
+                <button
+                  className={css.listItemBtn}
+                  id={id}
+                  type="button"
+                  onClick={this.props.onDeleteContact}
+                >
+                  Delete
+                </button>
               </li>
             );
           })}

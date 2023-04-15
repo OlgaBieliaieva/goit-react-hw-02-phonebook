@@ -1,23 +1,18 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import css from './ContactForm.module.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 const INITIAL_STATE = {
   name: '',
   number: '',
 };
-class ContactForm extends Component {
-  //   static propTypes = {
-  //     options: PropTypes.shape({
-  //       good: PropTypes.number.isRequired,
-  //       neutral: PropTypes.number.isRequired,
-  //       bad: PropTypes.number.isRequired,
-  //     }),
-  //   };
 
-  //   handleChangeName = e => {
-  //     console.log(e.target.value);
-  //   };
+class ContactForm extends Component {
+  static propTypes = {
+    addContact: PropTypes.func.isRequired,
+  };
+
   state = {
     name: '',
     number: '',

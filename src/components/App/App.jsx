@@ -19,8 +19,21 @@ class App extends Component {
       name: name,
       number: number,
     };
+    const contactNames = [];
+    this.state.contacts.map(contact => contactNames.push(contact.name));
+
+    if (contactNames.includes(name)) {
+      alert(`${name} is already in contacts`);
+    }
     this.setState(({ contacts }) => ({
       contacts: [contact, ...contacts],
+    }));
+  };
+
+  deleteContact = e => {
+    const contactId = e.target.id;
+    this.setState(({ contacts }) => ({
+      contacts: contacts.filter(contact => contact.id !== contactId),
     }));
   };
 
@@ -37,10 +50,14 @@ class App extends Component {
 
         <SectionTitle text="Contacts" />
         <Filter
-          data={this.state}
+          filter={this.state.filter}
           filterChangeHandler={this.handleFilterChange}
         />
-        <ContactList contacts={this.state.contacts} query={this.state.filter} />
+        <ContactList
+          contacts={this.state.contacts}
+          query={this.state.filter}
+          onDeleteContact={this.deleteContact}
+        />
       </main>
     );
   }

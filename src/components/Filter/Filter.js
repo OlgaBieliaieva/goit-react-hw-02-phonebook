@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import css from './Filter.module.css';
 
 class Filter extends Component {
-  //   static propTypes = {
-  //     options: PropTypes.shape({
-  //       good: PropTypes.number.isRequired,
-  //       neutral: PropTypes.number.isRequired,
-  //       bad: PropTypes.number.isRequired,
-  //     }),
-  //   };
+  static propTypes = {
+    filter: PropTypes.string.isRequired,
+    filterChangeHandler: PropTypes.func.isRequired,
+  };
+
   render() {
     return (
       <label className={css.formLabel}>
@@ -18,9 +16,8 @@ class Filter extends Component {
           className={css.formInput}
           type="text"
           name="filter"
-          value={this.props.data.filter}
+          value={this.props.filter}
           onChange={this.props.filterChangeHandler}
-          //   onFocus={this.showMessage}
           placeholder="type your query here..."
         />
       </label>
